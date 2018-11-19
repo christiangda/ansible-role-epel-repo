@@ -1,2 +1,25 @@
 ---
 # tasks file for epel-repo
+
+- name: include variables for CentOS/RHEL 6/7
+  include_vars: "{{ ansible_os_family|lower }}.yml"
+  when: (ansible_distribution_major_version == 6 or
+        ansible_distribution_major_version == 7) and
+        (ansible_distribution == 'CentOS' or
+        ansible_distribution == 'Red Hat Enterprise Linux' or
+        ansible_distribution == 'RedHat')
+
+- name: include variables for Amazon Linux 2
+  include_vars: "{{ ansible_distribution|lower }}-{{ ansible_distribution_version }}.yml"
+  when: ansible_distribution == 'Amazon' and
+        ansible_distribution_version == 2
+
+- name: import tasks for installation
+  import_task: "install-{{ ansible_os_family|lower }}".yml
+  when: ansible_os_family == 'RedHat' and
+        (ansible_distribution == 'CentOS' or
+        ansible_distribution == 'Red Hat Enterprise Linux' or
+        ansible_distribution == 'RedHat')
+- import_task: "install-{{  ansible_distribution|lower }}"
+  when: ansible_os_family == 'RedHat' and
+        ansible_distribution == 'Amazon'
