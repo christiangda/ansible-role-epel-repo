@@ -1,25 +1,57 @@
 ---
-# tasks file for epel-repo
+# Debug
+- debug:
+    msg:
+      - "ansible_os_family = {{ ansible_os_family }}"
+      - "ansible_distribution = {{ ansible_distribution }}"
+      - "ansible_distribution_version = {{ ansible_distribution_version }}"
+      - "ansible_distribution_major_version = {{ ansible_distribution_major_version }}"
 
+# Selective include of vars
 - name: include variables for CentOS/RHEL 6/7
-  include_vars: "{{ ansible_os_family|lower }}.yml"
-  when: (ansible_distribution_major_version == 6 or
-        ansible_distribution_major_version == 7) and
-        (ansible_distribution == 'CentOS' or
-        ansible_distribution == 'Red Hat Enterprise Linux' or
-        ansible_distribution == 'RedHat')
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "redhat.yml"
+    - "main.yml"
+  when: ansible_os_family == 'RedHat' and (
+        ansible_distribution == 'CentOS' or
+        ansible_distribution == 'RedHat'
+        ) and (
+          ansible_distribution_major_version == '7' or
+          ansible_distribution_major_version == '6'
+        )
 
 - name: include variables for Amazon Linux 2
-  include_vars: "{{ ansible_distribution|lower }}-{{ ansible_distribution_version }}.yml"
-  when: ansible_distribution == 'Amazon' and
-        ansible_distribution_version == 2
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "amazon-2.yml"
+    - "main.yml"
+  when: ansible_distribution == 'Amazon' and ansible_distribution_version == '2'
 
-- name: import tasks for installation
-  import_task: "install-{{ ansible_os_family|lower }}".yml
-  when: ansible_os_family == 'RedHat' and
-        (ansible_distribution == 'CentOS' or
-        ansible_distribution == 'Red Hat Enterprise Linux' or
-        ansible_distribution == 'RedHat')
-- import_task: "install-{{  ansible_distribution|lower }}"
-  when: ansible_os_family == 'RedHat' and
-        ansible_distribution == 'Amazon'
+# Debug
+- debug:
+    msg:
+      - "epel_repo_file_path = {{ epel_repo_file_path }}"
+      - "epel_repo_url = {{ epel_repo_url }}"
+      - "epel_repo_gpg_key_url = {{ epel_repo_gpg_key_url }}"
+      - "epel_package = {{ epel_package }}"
+
+# Globalize vars
+- name: define global vars
+  set_fact:
+    epel_repo_file_path: "{{ epel_repo_file_path }}"
+    epel_repo_url: "{{ epel_repo_url }}"
+    epel_repo_gpg_key_url: "{{ epel_repo_gpg_key_url }}"
+    epel_package: "{{ epel_package }}"
+
+# Install tasks
+- name: include tasks for installation on RedHat/CentOS distribution
+  include_tasks: "install-{{ ansible_os_family|lower }}.yml"
+  when: ansible_os_family == 'RedHat' and (
+        ansible_distribution == 'CentOS' or
+        ansible_distribution == 'RedHat'
+        )
+
+- name: include tasks for installation on Amazon distribution
+  include_tasks: "install-{{  ansible_distribution|lower }}.yml"
+  when: ansible_os_family == 'RedHat' and ansible_distribution == 'Amazon'

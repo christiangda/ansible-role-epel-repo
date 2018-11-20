@@ -1,7 +1,7 @@
 ---
 - name: check if EPEL repository exist
   stat:
-    path: {{ epel_repo_file_path }}
+    path: "{{ epel_repo_file_path }}"
   register: epel_repo_file_path_result
 
 - name: install EPEL repository
