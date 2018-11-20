@@ -1,7 +1,8 @@
 Ansible Role: epel-repo
 =========
+[![Build Status](https://travis-ci.org/christiangda/ansible-role-epel-repo.svg?branch=master)](https://travis-ci.org/christiangda/ansible-role-epel-repo)
 
-A brief description of the role goes here.
+This module [install EPEL Repository](https://fedoraproject.org/wiki/EPEL)
 
 Requirements
 ------------
