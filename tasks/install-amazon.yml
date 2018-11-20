@@ -1,29 +1,43 @@
 ---
 # Reference: https://aws.amazon.com/es/premiumsupport/knowledge-center/ec2-enable-epel/
 
+# Amazon Linux 1 and 2
+- name: check if EPEL repository exist on Amazon Linux
+  stat:
+    path: "{{ epel_repo_file_path }}"
+  register: epel_repo_file_path_result
+  when: >
+    ansible_os_family == 'RedHat' and
+    ansible_distribution == 'Amazon'
+
 # Amazon Linux 1
 - name: enable the EPEL repository on Amazon Linux 1
   shell: yum-config-manager --enable epel
-  when: ansible_distribution_version == 1
+  when: >
+    amazon_linux_distribution_version == 1 and
+    not epel_repo_file_path_result.stat.exists
 
 # Amazon Linux 2
-- name: check if EPEL repository exist on Amazon Linux 2
-  stat:
-    path: {{ epel_repo_file_path }}
-  register: epel_repo_file_path_result
-  when: ansible_distribution_version == 2
-
 - name: install EPEL repository on Amazon Linux 2
   yum:
     name: "{{ epel_repo_url }}"
     state: present
-  register: result
-  when: not epel_repo_file_path_result.stat.exists and
-        ansible_distribution_version == 2
+  when: >
+    amazon_linux_distribution_version == 2 and
+    not epel_repo_file_path_result.stat.exists
 
 - name: import EPEL repository GPG key on Amazon Linux 2
   rpm_key:
     key: "{{ epel_repo_gpg_key_url }}"
     state: present
-  when: not epel_repo_file_path_result.stat.exists and
-        ansible_distribution_version == 2
+  when: >
+    amazon_linux_distribution_version == 2 and
+    not epel_repo_file_path_result.stat.exists
+
+- name: install EPEL package on Amazon Linux 2
+  yum:
+    name: "{{ epel_package }}"
+    state: present
+  when: >
+    amazon_linux_distribution_version == 2 and
+    not epel_repo_file_path_result.stat.exists

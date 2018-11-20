@@ -16,3 +16,9 @@
     key: "{{ epel_repo_gpg_key_url }}"
     state: present
   when: not epel_repo_file_path_result.stat.exists
+
+- name: install EPEL package
+  yum:
+    name: "{{ epel_package }}"
+    state: present
+  when: not epel_repo_file_path_result.stat.exists
