@@ -1,8 +1,10 @@
 ---
 galaxy_info:
+  role_name: epel-repo
   author: Christian González Di Antonio
   description: Ansible Role for EPEL Repository
   license: license GPLv3
+  company: No Company Name Provided
   min_ansible_version: 2.4
 
   platforms:
