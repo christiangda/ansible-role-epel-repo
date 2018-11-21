@@ -24,5 +24,6 @@ galaxy_info:
     - system
     - utilities
     - amazon
+    - rhel
 
 dependencies: []

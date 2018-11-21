@@ -8,7 +8,8 @@ env:
   matrix:
     - MOLECULE_DISTRO: centos7
     - MOLECULE_DISTRO: centos6
-
+    - MOLECULE_DISTRO: amazonlinux:2
+    - MOLECULE_DISTRO: amazonlinux:1
 install:
   # Install test dependencies.
   - pip install molecule docker
