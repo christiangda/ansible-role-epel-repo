@@ -74,7 +74,8 @@ How to used it
       --private-key [~/location of my key.pem] \
       --become \
       --become-user=ec2-user \
-      -u ec2-user
+      --user ec2-user
+      [--extra-vars "show_debug_messages=True"] --> additional
 
 
 License
