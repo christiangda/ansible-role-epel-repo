@@ -11,12 +11,15 @@
 
 # get Amazon Linux version using "uname" command
 - name: get amazon linux version from "uname" command
-  shell: uname -r | awk -F'.' '{print $(NF-1)}'
+  shell: >
+    awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id |
+    tr -d '"' | awk '{print $1}'
   ignore_errors: true
-  register: amazon_linux_uname_result
+  register: amazon_linux_recipe_name_result
   when: >
     ansible_os_family == 'RedHat' and
     ansible_distribution == 'Amazon'
+  changed_when: false
 
 # Define facts to manage amazon linux version in a easy way
 - name: set fact "amazon_linux_distribution_version" for amazon linux 1
@@ -25,7 +28,7 @@
   when: >
     ansible_os_family == 'RedHat' and
     ansible_distribution == 'Amazon' and
-    amazon_linux_uname_result.stdout == 'amzn1'
+    amazon_linux_recipe_name_result.stdout == 'amzn'
 
 - name: set fact "amazon_linux_distribution_version" for amazon linux 2
   set_fact:
@@ -33,7 +36,7 @@
   when: >
     ansible_os_family == 'RedHat' and
     ansible_distribution == 'Amazon' and
-    amazon_linux_uname_result.stdout == 'amzn2'
+    amazon_linux_recipe_name_result.stdout == 'amzn2'
 
 # # Define facts to manage amazon linux version in a easy way
 # - name: set variables for amazon linux 1

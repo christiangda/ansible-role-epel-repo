@@ -16,6 +16,7 @@
   when: >
     amazon_linux_distribution_version == 1 and
     not epel_repo_file_path_result.stat.exists
+  changed_when: false
 
 # Amazon Linux 2
 - name: install EPEL repository on Amazon Linux 2
