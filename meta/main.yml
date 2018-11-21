@@ -13,8 +13,7 @@ galaxy_info:
         - 7
     - name: Amazon
       versions:
-        - 1
-        - 2
+        - all
 
   galaxy_tags:
     - epel
@@ -23,5 +22,6 @@ galaxy_info:
     - redhat
     - system
     - utilities
+    - amazon
 
 dependencies: []
