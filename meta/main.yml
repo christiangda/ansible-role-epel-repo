@@ -6,7 +6,6 @@ galaxy_info:
   license: license GPLv3
   min_ansible_version: 2.4
 
-  # https://galaxy.ansible.com/api/v1/platforms/
   platforms:
     - name: EL
       versions:
@@ -14,6 +13,15 @@ galaxy_info:
         - 7
     - name: Amazon
       versions:
-        - all
+        - 1
+        - 2
 
-  galaxy_tags: [epel, repository, repo]
+  galaxy_tags:
+    - epel
+    - repository
+    - centos
+    - redhat
+    - system
+    - utilities
+
+dependencies: []

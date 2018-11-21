@@ -7,33 +7,84 @@ This module [install EPEL Repository](https://fedoraproject.org/wiki/EPEL)
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role work on RedHat, CentOS and Amazon Linux distributions
+
+specific version:
+* RedHat
+  * 6
+  * 7
+* CentOS
+  * 6
+  * 7
+* Amazon Linux
+  * 1
+  * 2
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+* defaults/main.yml
+  * show_debug_messages -->  when true, show some debug messagges in execution
+* vars/main.yml
+  * epel_package --> package name for distributions
+  * epel_repo_file_path --> location of epel repo file in all distribution supported by this role
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+for RedHat/CentOS 6/7
 
     - hosts: servers
+      gather_facts: True
       roles:
-         - { role: christiangda.epel }
+         - christiangda.epel-repo
+
+for Amazon Linux 1/2 (my-playbook.yml)
+
+    - hosts: all
+      gather_facts: True
+      become: true
+      become_user: root
+      become_method: sudo
+      remote_user: ec2-user
+      roles:
+        - christiangda.epel-repo
+
+Inventory file sample (inventory)
+
+    [all]
+    10.14.x.y
+    10.14.v.z
+
+    [amazon-1]
+    10.14.x.y
+
+    [amazon-2]
+    10.14.v.z
+
+How to used it
+
+    ansible-playbook my-playbook.yml \
+      --inventory inventory \
+      --private-key [~/location of my key.pem] \
+      --become \
+      --become-user=ec2-user \
+      -u ec2-user
+
 
 License
 -------
 
-BSD
+This module is released under the GNU General Public License Version 3:
+
+* [http://www.gnu.org/licenses/gpl-3.0-standalone.html](http://www.gnu.org/licenses/gpl-3.0-standalone.html)
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+* [Christian González](https://github.com/christiangda)

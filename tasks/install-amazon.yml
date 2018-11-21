@@ -1,8 +1,8 @@
 ---
 # Reference: https://aws.amazon.com/es/premiumsupport/knowledge-center/ec2-enable-epel/
 
-# Amazon Linux 1 and 2
-- name: check if EPEL repository exist on Amazon Linux
+# Amazon Linux 1/2
+- name: check if EPEL repository exist
   stat:
     path: "{{ epel_repo_file_path }}"
   register: epel_repo_file_path_result
