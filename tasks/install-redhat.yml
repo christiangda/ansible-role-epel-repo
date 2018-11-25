@@ -22,3 +22,17 @@
     name: "{{ epel_package }}"
     state: present
   when: not epel_repo_file_path_result.stat.exists
+
+# Only for RedHat 7
+# reference: https://fedoraproject.org/wiki/EPEL
+- name: enable the optional and extras repositories for RHEL 7
+  rhsm_repository:
+    name: "{{ item }}"
+    state: enable
+  with_items:
+    - rhel-*-optional-rpms
+    - rhel-*-extras-rpms
+  when: >
+    ansible_os_family == 'RedHat' and
+    ansible_distribution == 'RedHat' and
+    ansible_distribution_major_version == 7

@@ -24,15 +24,26 @@ Role Variables
 --------------
 
 * defaults/main.yml
-  * show_debug_messages -->  when true, show some debug messagges in execution
+  * show_debug_messages: false -->  when true, show some debug messagges in execution
 * vars/main.yml
-  * epel_package --> package name for distributions
-  * epel_repo_file_path --> location of epel repo file in all distribution supported by this role
+  * epel_package: "epel-release" --> package name for distributions
+  * epel_repo_file_path: "/etc/yum.repos.d/epel.repo" --> location of epel repo file in all distribution supported by this role
+* vars/redhat.yml
+  * epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+  * epel_repo_gpg_key_url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
+* vars/amazon-2.yml
+  * epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
+  * epel_repo_gpg_key_url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
+* vars/amazon-1.yml
+  * epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm"
+  * epel_repo_gpg_key_url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6"
+
 
 Dependencies
 ------------
 
 None.
+
 
 Example Playbook
 ----------------
