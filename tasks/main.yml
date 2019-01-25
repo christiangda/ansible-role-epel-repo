@@ -1,5 +1,4 @@
 ---
-# get Amazon Linux version using "uname" command
 - name: Get amazon linux version from "uname" command
   shell: >
     awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id | tr -d '"' | awk '{print $1}'
