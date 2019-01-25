@@ -1,19 +1,8 @@
 ---
-# debug
-- name: debug - values from ansible facts
-  debug:
-    msg:
-      - "ansible_os_family = {{ ansible_os_family }}"
-      - "ansible_distribution = {{ ansible_distribution }}"
-      - "ansible_distribution_version = {{ ansible_distribution_version }}"
-      - "ansible_distribution_major_version = {{ ansible_distribution_major_version }}"
-  when: show_debug_messages
-
 # get Amazon Linux version using "uname" command
-- name: get amazon linux version from "uname" command
+- name: Get amazon linux version from "uname" command
   shell: >
-    awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id |
-    tr -d '"' | awk '{print $1}'
+    awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id | tr -d '"' | awk '{print $1}'
   ignore_errors: true
   register: amazon_linux_recipe_name_result
   when: >
@@ -22,7 +11,7 @@
   changed_when: false
 
 # Define facts to manage amazon linux version in a easy way
-- name: set fact "amazon_linux_distribution_version" for amazon linux 1
+- name: Set fact "amazon_linux_distribution_version" for amazon linux 1
   set_fact:
     amazon_linux_distribution_version: 1
   when: >
@@ -30,7 +19,7 @@
     ansible_distribution == 'Amazon' and
     amazon_linux_recipe_name_result.stdout == 'amzn'
 
-- name: set fact "amazon_linux_distribution_version" for amazon linux 2
+- name: Set fact "amazon_linux_distribution_version" for amazon linux 2
   set_fact:
     amazon_linux_distribution_version: 2
   when: >
@@ -38,23 +27,8 @@
     ansible_distribution == 'Amazon' and
     amazon_linux_recipe_name_result.stdout == 'amzn2'
 
-# # Define facts to manage amazon linux version in a easy way
-# - name: set variables for amazon linux 1
-#   set_fact:
-#     amazon_linux_distribution_version: 1
-#   when: >
-#     ansible_distribution_version == '2018.03' and
-#     ansible_distribution_major_version == 'NA'
-
-# - name: set variables for amazon linux 2
-#   set_fact:
-#     amazon_linux_distribution_version: 2
-#   when: >
-#     ansible_distribution_version == '(Karoo)' and
-#     ansible_distribution_major_version == 'NA'
-
 # Selective include of vars
-- name: include variables for CentOS/RHEL - 6/7
+- name: Include variables for CentOS/RHEL - 6/7
   include_vars: "{{ item }}"
   with_first_found:
     - "redhat.yml"
@@ -68,7 +42,7 @@
       ansible_distribution_major_version == '6'
     )
 
-- name: include variables for Amazon Linux 1
+- name: Include variables for Amazon Linux 1
   include_vars: "{{ item }}"
   with_first_found:
     - "amazon-1.yml"
@@ -77,7 +51,7 @@
     ansible_distribution == 'Amazon' and
     amazon_linux_distribution_version == 1
 
-- name: include variables for Amazon Linux 2
+- name: Include variables for Amazon Linux 2
   include_vars: "{{ item }}"
   with_first_found:
     - "amazon-2.yml"
@@ -86,18 +60,8 @@
     ansible_distribution == 'Amazon' and
     amazon_linux_distribution_version == 2
 
-# debug
-- name: debug - values from vars/ files
-  debug:
-    msg:
-      - "epel_repo_file_path = {{ epel_repo_file_path }}"
-      - "epel_repo_url = {{ epel_repo_url }}"
-      - "epel_repo_gpg_key_url = {{ epel_repo_gpg_key_url }}"
-      - "epel_package = {{ epel_package }}"
-  when: show_debug_messages
-
 # Globalize vars
-- name: definning global facts
+- name: Definning global facts
   set_fact:
     epel_repo_file_path: "{{ epel_repo_file_path }}"
     epel_repo_url: "{{ epel_repo_url }}"
@@ -105,7 +69,7 @@
     epel_package: "{{ epel_package }}"
 
 # Installation tasks
-- name: include tasks for installation on RedHat/CentOS distribution
+- name: Include tasks for installation on RedHat/CentOS distribution
   include_tasks: "install-{{ ansible_os_family|lower }}.yml"
   when: >
     ansible_os_family == 'RedHat' and (
@@ -113,7 +77,7 @@
       ansible_distribution == 'RedHat'
     )
 
-- name: include tasks for installation on Amazon distribution
+- name: Include tasks for installation on Amazon distribution
   include_tasks: "install-{{  ansible_distribution|lower }}.yml"
   when: >
     ansible_os_family == 'RedHat' and
