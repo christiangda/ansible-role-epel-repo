@@ -24,8 +24,6 @@ specific version:
 Role Variables
 --------------
 
-* defaults/main.yml
-  * show_debug_messages: false -->  when true, show some debug messagges in execution
 * vars/main.yml
   * epel_package: "epel-release" --> package name for distributions
   * epel_repo_file_path: "/etc/yum.repos.d/epel.repo" --> location of epel repo file in all distribution supported by this role
