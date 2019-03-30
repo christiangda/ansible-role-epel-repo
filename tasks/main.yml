@@ -1,6 +1,6 @@
 ---
 - name: Get amazon linux version from "uname" command
-  shell: >
+  command: >
     awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id | tr -d '"' | awk '{print $1}'
   ignore_errors: true
   register: amazon_linux_recipe_name_result

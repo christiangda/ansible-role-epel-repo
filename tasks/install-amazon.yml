@@ -12,7 +12,7 @@
 
 # Amazon Linux 1
 - name: Enable the EPEL repository on Amazon Linux 1
-  shell: yum-config-manager --enable epel
+  command: yum-config-manager --enable epel
   when: >
     amazon_linux_distribution_version == 1 and
     not epel_repo_file_path_result.stat.exists
