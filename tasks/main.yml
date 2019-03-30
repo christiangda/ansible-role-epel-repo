@@ -59,14 +59,6 @@
     ansible_distribution == 'Amazon' and
     amazon_linux_distribution_version == 2
 
-# Globalize vars
-- name: Definning global facts
-  set_fact:
-    epel_repo_file_path: "{{ epel_repo_file_path }}"
-    epel_repo_url: "{{ epel_repo_url }}"
-    epel_repo_gpg_key_url: "{{ epel_repo_gpg_key_url }}"
-    epel_package: "{{ epel_package }}"
-
 # Installation tasks
 - name: Include tasks for installation on RedHat/CentOS distribution
   include_tasks: "install-{{ ansible_os_family|lower }}.yml"
