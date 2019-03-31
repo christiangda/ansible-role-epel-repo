@@ -8,12 +8,10 @@ branches:
 
 env:
   global:
-    - ROLE_NAME: epel-repo
+    - ROLE_NAME=epel-repo
   matrix:
-    - MOLECULE_DISTRO: centos7
-    - MOLECULE_DISTRO: centos6
-    - MOLECULE_DISTRO: amazonlinux:2
-    - MOLECULE_DISTRO: amazonlinux:1
+    - OS_TYPE=centos OS_VERSION=7
+
 install:
   # Install test dependencies.
   - pip install molecule docker
@@ -25,7 +23,8 @@ before_script:
   - cd $ROLE_NAME
 
 script:
-  # Run tests.
+  - molecule --version
+  - ansible --version
   - molecule test
 
 notifications:
