@@ -9,12 +9,27 @@ branches:
 env:
   global:
     - ROLE_NAME=epel-repo
-  matrix:
-    - OS_TYPE=centos OS_VERSION=7
+
+matrix:
+  include:
+    - name: "Python 2.7"
+      python: "2.7"
+      env: ANSIBLE_VERSION=latest
+    - name: "Python 3.7"
+      python: "3.7"
+      env: ANSIBLE_VERSION=latest
+
+before_install:
+  - sudo apt-get update -qq
 
 install:
-  # Install test dependencies.
-  - pip install molecule docker
+  # Install Ansible.
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install molecule docker; fi
+
+# install:
+#   # Install test dependencies.
+#   - pip install molecule docker
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
