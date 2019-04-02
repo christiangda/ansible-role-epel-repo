@@ -90,6 +90,43 @@ How to used it
 Development / Contributing
 --------------------------
 
+This role is tested using [Molecule](https://molecule.readthedocs.io/en/latest/) and was developed using
+[Python Virtual Environments](https://docs.python.org/3/tutorial/venv.html)
+
+Prepare your environment
+
+```bash
+mkdir ansible-roles
+cd ansible-roles/
+
+virtualenv --no-site-packages --python /usr/bin/python2.7 vend
+source vend/bin/activate
+pip install pip --upgrade
+pip install pytest
+pip install pytest-mock
+pip install pylint
+pip install rope
+pip install autopep8
+pip install yamllint
+pip install molecule
+pip install ansible
+pip install docker-py
+```
+
+Clone the role repository and create symbolic link
+```bash
+git clone https://github.com/christiangda/ansible-role-epel_repo.git
+ln -s ansible-role-epel_repo epel_repo
+cd ansible-role-epel_repo
+```
+
+Execute the test
+```bash
+molecule test
+```
+
+Additionally if you want to test using VMs, I have a very nice [ansible-playground project](https://github.com/christiangda/ansible-playground) that use Vagrant and VirtualBox, try it!.
+
 
 License
 -------
