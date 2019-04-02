@@ -11,7 +11,9 @@ branches:
 env:
   global:
     - ROLE_NAME=epel-repo
+  matrix:
     - ANSIBLE_VERSION=latest
+    - ANSIBLE_VERSION=2.7.9
 
 before_install:
   - sudo apt-get update -qq
