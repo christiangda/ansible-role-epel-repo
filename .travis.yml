@@ -14,11 +14,12 @@ env:
   global:
     - ROLE_NAME=epel-repo
   matrix:
-    - ANSIBLE_VERSION=latest
+    - ANSIBLE_VERSION=">=2.7"
+    - ANSIBLE_VERSION=">=2.6,<2.7"
 
 install:
   # Install Ansible.
-  - pip install ansible==$ANSIBLE_VERSION
+  - pip install ansible"${ANSIBLE_VERSION}"
   - pip install molecule
 
 # install:
