@@ -15,12 +15,11 @@ env:
     - ROLE_NAME=epel-repo
   matrix:
     - ANSIBLE_VERSION=latest
-    - ANSIBLE_VERSION=2.7.9
 
 install:
   # Install Ansible.
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install molecule docker; fi
+  - pip install ansible==$ANSIBLE_VERSION
+  - pip install molecule
 
 # install:
 #   # Install test dependencies.
