@@ -15,7 +15,8 @@ env:
     - ROLE_NAME=epel-repo
   matrix:
     - ANSIBLE_VERSION=">=2.7"
-    - ANSIBLE_VERSION=">=2.4,<2.5"
+    - ANSIBLE_VERSION=">=2.6,<2.7"
+    - ANSIBLE_VERSION=">=2.5,<2.6"
 
 install:
   # Install Ansible and Molecule.
