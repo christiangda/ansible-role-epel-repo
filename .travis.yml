@@ -2,7 +2,7 @@
 language: python
 python:
   - "2.7"
-  - "3.7"
+  - "3.6"
 
 services: docker
 
@@ -23,10 +23,6 @@ install:
   - pip install ansible"${ANSIBLE_VERSION}"
   - pip install molecule
   - pip install docker
-
-# install:
-#   # Install test dependencies.
-#   - pip install molecule docker
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
