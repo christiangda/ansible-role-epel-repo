@@ -11,6 +11,8 @@ branches:
     - master
 
 env:
+  global:
+    - ROLE_NAME=epel-repo
   matrix:
     - ANSIBLE_VERSION=">=2.7"
     - ANSIBLE_VERSION=">=2.6,<2.7"
@@ -23,6 +25,10 @@ install:
 
 before_script:
   - ls -la
+  - cd ../
+  - ls -la
+  - mv ansible-role-$ROLE_NAME $ROLE_NAME
+  - cd $ROLE_NAME
 
 script:
   - molecule --version
