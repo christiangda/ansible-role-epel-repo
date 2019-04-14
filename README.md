@@ -37,7 +37,7 @@ for RedHat/CentOS 6/7
 - hosts: servers
     gather_facts: True
     roles:
-        - christiangda.epel-repo
+        - christiangda.epel_repo
 ```
 
 for Amazon Linux 1/2 (my-playbook.yml)
@@ -50,7 +50,7 @@ for Amazon Linux 1/2 (my-playbook.yml)
     become_method: sudo
     remote_user: ec2-user
     roles:
-        - christiangda.epel-repo
+        - christiangda.epel_repo
 ```
 
 Inventory file sample (inventory)
