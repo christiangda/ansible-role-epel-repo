@@ -1,4 +1,4 @@
-# Ansible Role: epel-repo
+# Ansible Role: christiangda.epel_repo
 
 [![Build Status](https://travis-ci.org/christiangda/ansible-role-epel-repo.svg?branch=master)](https://travis-ci.org/christiangda/ansible-role-epel-repo)
 [![Ansible Role](https://img.shields.io/ansible/role/33302.svg)](https://galaxy.ansible.com/christiangda/epel_repo)
@@ -8,8 +8,6 @@ This role [install EPEL Repository](https://fedoraproject.org/wiki/EPEL)
 ## Requirements
 
 This role work on RedHat, CentOS and Amazon Linux distributions
-
-specific version:
 
 * RedHat
   * 6
@@ -53,7 +51,7 @@ for Amazon Linux 1/2 (my-playbook.yml)
         - christiangda.epel_repo
 ```
 
-Inventory file sample (inventory)
+**Inventory file sample (inventory)**
 
 ```ini
 [all]
@@ -67,7 +65,7 @@ Inventory file sample (inventory)
 10.14.v.z
 ```
 
-How to used it
+**How to used it**
 
 ```bash
 ansible-playbook my-playbook.yml \
@@ -83,7 +81,7 @@ ansible-playbook my-playbook.yml \
 This role is tested using [Molecule](https://molecule.readthedocs.io/en/latest/) and was developed using
 [Python Virtual Environments](https://docs.python.org/3/tutorial/venv.html)
 
-Prepare your environment
+**Prepare your environment**
 
 ```bash
 mkdir ansible-roles
@@ -103,19 +101,21 @@ pip install ansible
 pip install docker-py
 ```
 
-Clone the role repository and create symbolic link
+**Clone the role repository and create symbolic link**
+
 ```bash
 git clone https://github.com/christiangda/ansible-role-epel_repo.git
 ln -s ansible-role-epel_repo epel_repo
 cd ansible-role-epel_repo
 ```
 
-Execute the test
+**Execute the test**
+
 ```bash
 molecule test
 ```
 
-Additionally if you want to test using VMs, I have a very nice [ansible-playground project](https://github.com/christiangda/ansible-playground) that use Vagrant and VirtualBox, try it!.
+**Additionally if you want to test using VMs, I have a very nice [ansible-playground project](https://github.com/christiangda/ansible-playground) that use Vagrant and VirtualBox, try it!.**
 
 
 ## License
