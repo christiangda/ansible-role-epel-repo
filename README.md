@@ -29,7 +29,7 @@ None.
 
 ## Example Playbook
 
-for RedHat/CentOS 6/7
+**for RedHat/CentOS 6/7**
 
 ```yaml
 - hosts: servers
@@ -38,7 +38,7 @@ for RedHat/CentOS 6/7
         - christiangda.epel_repo
 ```
 
-for Amazon Linux 1/2 (my-playbook.yml)
+**for Amazon Linux 1/2 (my-playbook.yml)**
 
 ```yaml
 - hosts: all
@@ -104,9 +104,9 @@ pip install docker-py
 **Clone the role repository and create symbolic link**
 
 ```bash
-git clone https://github.com/christiangda/ansible-role-epel_repo.git
-ln -s ansible-role-epel_repo epel_repo
-cd ansible-role-epel_repo
+git clone https://github.com/christiangda/ansible-role-epel-repo.git
+ln -s ansible-role-epel_repo epel-repo
+cd ansible-role-epel-repo
 ```
 
 **Execute the test**

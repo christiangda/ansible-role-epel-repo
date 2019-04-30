@@ -27,7 +27,7 @@
     amazon_linux_recipe_name_result.stdout == 'amzn2'
 
 # Selective include of vars
-- name: Include variables for CentOS/RHEL - 6/7
+- name: Include variables for CentOS/RHEL
   include_vars: "{{ item }}"
   with_first_found:
     - "redhat.yml"
