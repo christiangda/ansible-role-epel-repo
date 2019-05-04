@@ -87,7 +87,7 @@ This role is tested using [Molecule](https://molecule.readthedocs.io/en/latest/)
 mkdir ansible-roles
 cd ansible-roles/
 
-virtualenv --no-site-packages --python /usr/bin/python2.7 vend
+python3 -m vend vend
 source vend/bin/activate
 pip install pip --upgrade
 pip install pytest
@@ -105,7 +105,7 @@ pip install docker-py
 
 ```bash
 git clone https://github.com/christiangda/ansible-role-epel-repo.git
-ln -s ansible-role-epel_repo epel-repo
+ln -s ansible-role-epel_repo christiangda.epel-repo
 cd ansible-role-epel-repo
 ```
 
