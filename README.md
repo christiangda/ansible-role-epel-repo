@@ -87,8 +87,8 @@ This role is tested using [Molecule](https://molecule.readthedocs.io/en/latest/)
 mkdir ansible-roles
 cd ansible-roles/
 
-python3 -m vend vend
-source vend/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install pip --upgrade
 pip install pytest
 pip install pytest-mock
