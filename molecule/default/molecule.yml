@@ -1,8 +1,4 @@
 ---
-molecule:
-  ignore_paths:
-    - venv
-
 dependency:
   name: galaxy
 
@@ -11,6 +7,9 @@ driver:
 
 lint:
   name: yamllint
+  options:
+    config-data:
+      ignore: venv
 
 platforms:
   - name: centos-7

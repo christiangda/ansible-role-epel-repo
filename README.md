@@ -21,7 +21,16 @@ This role work on RedHat, CentOS and Amazon Linux distributions
 
 ## Role Variables
 
-None.
+```yaml
+# posible values:
+# - true
+# - false
+# default value: false
+# notes:
+# * apply only to Redhat 7, enable/disable extra repos
+# Reference: https://fedoraproject.org/wiki/EPEL
+epel_enable_redhat_extras_repos: false
+```
 
 ## Dependencies
 
@@ -35,7 +44,9 @@ None.
 - hosts: servers
     gather_facts: True
     roles:
-        - christiangda.epel_repo
+        - role: christiangda.epel_repo
+          vars:
+            epel_enable_redhat_extras_repos: true
 ```
 
 **for Amazon Linux 1/2 (my-playbook.yml)**
