@@ -94,6 +94,8 @@ This role is tested using [Molecule](https://molecule.readthedocs.io/en/latest/)
 
 **Prepare your environment**
 
+Python 3
+
 ```bash
 mkdir ansible-roles
 cd ansible-roles/
@@ -101,6 +103,9 @@ cd ansible-roles/
 python3 -m venv venv
 source venv/bin/activate
 pip install pip --upgrade
+pip install ansible
+pip install selinux
+pip install docker
 pip install pytest
 pip install pytest-mock
 pip install pylint
@@ -108,19 +113,24 @@ pip install rope
 pip install autopep8
 pip install yamllint
 pip install molecule
-pip install ansible
-pip install docker-py
 ```
 
 **Clone the role repository and create symbolic link**
 
 ```bash
 git clone https://github.com/christiangda/ansible-role-epel-repo.git
-ln -s ansible-role-epel_repo christiangda.epel-repo
+ln -s ansible-role-epel-repo christiangda.epel_repo
 cd ansible-role-epel-repo
 ```
 
 **Execute the test**
+
+```bash
+molecule create
+molecule converge
+```
+
+or
 
 ```bash
 molecule test
