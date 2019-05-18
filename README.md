@@ -128,6 +128,7 @@ cd ansible-role-epel-repo
 ```bash
 molecule create
 molecule converge
+molecule verify
 ```
 
 or
