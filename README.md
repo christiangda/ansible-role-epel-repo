@@ -19,6 +19,8 @@ This role work on RedHat, CentOS and Amazon Linux distributions
   * 1
   * 2
 
+To see the compatibility matrix of Python vs. Ansible see the project [Travis-CI build matrix](https://travis-ci.org/christiangda/ansible-role-epel-repo)
+
 ## Role Variables
 
 ```yaml
