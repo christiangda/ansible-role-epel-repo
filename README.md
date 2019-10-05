@@ -12,9 +12,11 @@ This role work on RedHat, CentOS and Amazon Linux distributions
 * RedHat
   * 6
   * 7
+  * 8
 * CentOS
   * 6
   * 7
+  * 8
 * Amazon Linux
   * 1
   * 2
@@ -29,7 +31,7 @@ To see the compatibility matrix of Python vs. Ansible see the project [Travis-CI
 # - false
 # default value: false
 # notes:
-# * apply only to Redhat 7, enable/disable extra repos
+# * apply only to Redhat 7/8, enable/disable extra repositories
 # Reference: https://fedoraproject.org/wiki/EPEL
 epel_enable_redhat_extras_repos: false
 ```
@@ -40,7 +42,7 @@ None.
 
 ## Example Playbook
 
-**for RedHat/CentOS 6/7**
+**for RedHat/CentOS 6/7/8**
 
 ```yaml
 - hosts: servers
@@ -171,7 +173,6 @@ molecule test
 ```
 
 **Additionally if you want to test using VMs, I have a very nice [ansible-playground project](https://github.com/christiangda/ansible-playground) that use Vagrant and VirtualBox, try it!.**
-
 
 ## License
 
