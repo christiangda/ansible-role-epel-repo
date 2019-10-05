@@ -10,22 +10,64 @@
     state: present
   when: not epel_repo_file_path_result.stat.exists
 
-- name: Install EPEL repository
+- name: Install EPEL repository RedHat/CentOS 6/7
   yum:
     name: "{{ epel_repo_url }}"
     state: present
   register: result
   when: not epel_repo_file_path_result.stat.exists
+  when: >
+    ansible_os_family == 'RedHat' and (
+      ansible_distribution == 'CentOS' or
+      ansible_distribution == 'RedHat'
+    ) and (
+      ansible_distribution_major_version == '7' or
+      ansible_distribution_major_version == '6'
+    )
 
-- name: Install EPEL package
+- name: Install EPEL repository RedHat/CentOS 8
+  dnf:
+    name: "{{ epel_repo_url }}"
+    state: present
+  register: result
+  when: not epel_repo_file_path_result.stat.exists
+  when: >
+    ansible_os_family == 'RedHat' and (
+      ansible_distribution == 'CentOS' or
+      ansible_distribution == 'RedHat'
+    ) and
+    ansible_distribution_major_version == '8'
+
+
+- name: Install EPEL package RedHat/CentOS 6/7
   yum:
     name: "{{ epel_package }}"
     state: present
   when: not epel_repo_file_path_result.stat.exists
+  when: >
+    ansible_os_family == 'RedHat' and (
+      ansible_distribution == 'CentOS' or
+      ansible_distribution == 'RedHat'
+    ) and (
+      ansible_distribution_major_version == '7' or
+      ansible_distribution_major_version == '6'
+    )
+
+- name: Install EPEL package RedHat/CentOS 8
+  dnf:
+    name: "{{ epel_package }}"
+    state: present
+  when: not epel_repo_file_path_result.stat.exists
+  when: >
+    ansible_os_family == 'RedHat' and (
+      ansible_distribution == 'CentOS' or
+      ansible_distribution == 'RedHat'
+    ) and
+    ansible_distribution_major_version == '8'
 
 # Only for RedHat 7
 # reference: https://fedoraproject.org/wiki/EPEL
-- name: Enable the optional and extras repositories for RHEL 7
+- name: Enable the optional and extras repositories for RedHat 7
   rhsm_repository:
     name: "{{ item }}"
     state: enabled
@@ -40,7 +82,7 @@
 
 # Only for RedHat 8
 # reference: https://fedoraproject.org/wiki/EPEL
-- name: Enable the optional and extras repositories for RHEL 8
+- name: Enable the optional and extras repositories for RedHat 8
   rhsm_repository:
     name: "{{ item }}"
     state: enabled
