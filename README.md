@@ -26,7 +26,7 @@ To see the compatibility matrix of Python vs. Ansible see the project [Travis-CI
 ## Role Variables
 
 ```yaml
-# posible values:
+# possible values:
 # - true
 # - false
 # default value: false
