@@ -46,11 +46,11 @@ None.
 
 ```yaml
 - hosts: servers
-    gather_facts: True
-    roles:
-        - role: christiangda.epel_repo
-          vars:
-            epel_enable_redhat_extras_repos: true
+  gather_facts: True
+  roles:
+    - role: christiangda.epel_repo
+      vars:
+        epel_enable_redhat_extras_repos: true
 ```
 
 **for Amazon Linux 1/2 (my-playbook.yml)**
@@ -63,7 +63,7 @@ None.
     become_method: sudo
     remote_user: ec2-user
     roles:
-        - christiangda.epel_repo
+      - christiangda.epel_repo
 ```
 
 **Inventory file sample (inventory)**
