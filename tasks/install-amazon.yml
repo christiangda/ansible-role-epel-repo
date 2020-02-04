@@ -22,6 +22,8 @@
   yum:
     name: "{{ epel_repo_url }}"
     state: present
+  retries: "{{ epel_global_downloads_retries }}"
+  delay: "{{ epel_global_downloads_delay }}"
   when: >
     ansible_os_family == 'RedHat' and
     ansible_distribution == 'Amazon' and
@@ -31,6 +33,8 @@
   yum:
     name: "{{ epel_package }}"
     state: present
+  retries: "{{ epel_global_downloads_retries }}"
+  delay: "{{ epel_global_downloads_delay }}"
   when: >
     ansible_os_family == 'RedHat' and
     ansible_distribution == 'Amazon' and
